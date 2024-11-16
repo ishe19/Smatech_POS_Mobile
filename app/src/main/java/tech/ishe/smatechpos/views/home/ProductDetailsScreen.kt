@@ -1,5 +1,6 @@
 package tech.ishe.smatechpos.views.home
 
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -47,6 +48,7 @@ import tech.ishe.smatechpos.ui.theme.GreenEnd
 import tech.ishe.smatechpos.ui.theme.GreenStart
 import tech.ishe.smatechpos.ui.theme.OrangeStart
 import tech.ishe.smatechpos.ui.theme.PurpleStart
+import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
@@ -57,6 +59,9 @@ fun ProductDetailsScreen(productModel: ProductModel) {
     val context = LocalContext.current
     val productsViewModel: ProductsViewModel =
         ViewModelProvider(context as ComponentActivity)[ProductsViewModel::class.java]
+
+    val cartViewModel: CartViewModel =
+        ViewModelProvider(context)[CartViewModel::class.java]
 
     var productCount by remember {
         mutableIntStateOf(1)
@@ -85,8 +90,8 @@ fun ProductDetailsScreen(productModel: ProductModel) {
                     Button(
                         onClick = {
                             val cartItemModel = CartItemModel(productModel, productCount)
-
-
+                            cartViewModel.addToCart(cartItemModel)
+                            Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent

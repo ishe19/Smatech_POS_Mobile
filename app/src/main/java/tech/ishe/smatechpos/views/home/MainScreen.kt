@@ -1,9 +1,12 @@
 package tech.ishe.smatechpos.views.home
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -16,16 +19,22 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.cart.CartTab
-import tech.ishe.smatechpos.views.home.widgets.barItems
 import tech.ishe.smatechpos.views.receipts.ReceiptsTab
+import tech.ishe.smatechpos.views.utils.barItems
 
 @Composable
 fun MainScreen(productsViewModel: ProductsViewModel, navController: NavController) {
 
-//    val navController = rememberNavController()
+    val context = LocalContext.current
+
+    val cartViewModel: CartViewModel =
+        ViewModelProvider(context as ComponentActivity)[CartViewModel::class.java]
 
     var selectedIndex by remember {
         mutableIntStateOf(0)
@@ -46,11 +55,25 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
                                 selectedIndex = index
                             },
                             icon = {
-                                Icon(
-                                    imageVector = item.icon,
-                                    contentDescription = item.title,
-                                    tint = MaterialTheme.colorScheme.onBackground
-                                )
+
+                                BadgedBox(badge = {
+                                    if (index == 1) {
+                                    Badge(){
+                                            val cartCount = cartViewModel.cartList.value?.size
+                                            if (cartCount != null) {
+                                                Text(text = cartCount.toString())
+                                            }
+                                        }
+                                    }
+                                }) {
+                                    Icon(
+                                        imageVector = item.icon,
+                                        contentDescription = item.title,
+                                        tint = MaterialTheme.colorScheme.onBackground
+                                    )
+                                }
+
+
                             },
                             label = {
                                 Text(

@@ -102,6 +102,7 @@ fun CartCard(cartItemModel: CartItemModel) {
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
                     fontSize = 16.sp,
+                    maxLines = 2,
                     textAlign = TextAlign.Start
                 )
                 Spacer(

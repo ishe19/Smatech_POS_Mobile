@@ -1,5 +1,13 @@
 package tech.ishe.smatechpos.views.utils
 
+import android.content.ContentValues
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.pdf.PdfDocument
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +22,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import tech.ishe.smatechpos.data.models.BottomNavigationItem
+import tech.ishe.smatechpos.data.models.OrderModel
+import tech.ishe.smatechpos.views.receipts.ReceiptDetailsScreen
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 
 fun getGradient(
     startColor: Color,
@@ -56,3 +72,7 @@ fun LoadingOverlay(isLoading: Boolean) {
         }
     }
 }
+
+
+
+

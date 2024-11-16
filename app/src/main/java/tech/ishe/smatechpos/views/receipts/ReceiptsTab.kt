@@ -27,6 +27,7 @@ import tech.ishe.smatechpos.data.models.OrderModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.views.receipts.widgets.ReceiptCard
+import tech.ishe.smatechpos.views.utils.ScreenDimensions
 
 @Composable
 fun ReceiptsTab(navController: NavController, modifier: Modifier) {
@@ -83,7 +84,13 @@ fun ReceiptsTab(navController: NavController, modifier: Modifier) {
                 ) {
                     if (receiptsList.isEmpty()) {
                         item {
-                            Text(text = "No order receipts at the moment...")
+                            Box(modifier = Modifier
+                                .height((ScreenDimensions.screenHeightDp * 0.8).dp)
+                                .fillParentMaxWidth(),
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(text = "No order receipts at the moment...")
+                            }
                         }
                     } else {
                         items(receiptsList.size) { index ->

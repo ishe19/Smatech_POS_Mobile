@@ -51,14 +51,12 @@ import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.views.cart.widgets.CartCard
-import tech.ishe.smatechpos.views.utils.LoadingOverlay
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient
 import java.util.Locale
 
-@Preview(showBackground = true)
 @Composable
-fun CartTab() {
+fun CartTab(modifier: Modifier) {
 
     val context = LocalContext.current
     val cartViewModel: CartViewModel =
@@ -77,12 +75,11 @@ fun CartTab() {
 
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(vertical = 32.dp, horizontal = 4.dp),
+            .padding(vertical = 2.dp, horizontal = 4.dp),
     ) {
 
-        Spacer(modifier = Modifier.height(24.dp))
         Box(
             modifier = Modifier
                 .height((ScreenDimensions.screenHeightDp / 1.7).dp)

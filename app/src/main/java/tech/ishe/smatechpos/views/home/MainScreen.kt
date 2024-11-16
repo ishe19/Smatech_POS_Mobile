@@ -105,7 +105,7 @@ fun ContentScreen(
     when (selectedIndex) {
         0 -> HomeTab(viewModel = productsViewModel, navController = navController)
         1 -> CartTab()
-        2 -> ReceiptsTab()
+        2 -> ReceiptsTab(navController)
     }
 }
 

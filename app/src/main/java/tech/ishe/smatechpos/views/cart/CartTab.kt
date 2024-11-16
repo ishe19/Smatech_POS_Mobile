@@ -97,25 +97,7 @@ fun CartTab(modifier: Modifier) {
                 if (cartList != null) {
                     if (cartList.isEmpty()) {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .height((ScreenDimensions.screenHeightDp / 1.7).dp)
-                                    .fillMaxWidth(),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize(),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Rounded.RemoveShoppingCart,
-                                        contentDescription = "Empty shopping cart"
-                                    )
-                                    Text(text = "Nothing in your cart yet...")
-                                }
-                            }
+                            EmptyShoppingCart()
                         }
                     } else {
                         items(cartList.size) { index ->
@@ -123,6 +105,8 @@ fun CartTab(modifier: Modifier) {
                         }
                     }
 
+                } else {
+                    item { EmptyShoppingCart() }
                 }
             }
         }
@@ -210,10 +194,14 @@ fun CartTab(modifier: Modifier) {
             Button(
                 onClick = {
                     if (cartList != null) {
-                        if(cartList.isNotEmpty()){
+                        if (cartList.isNotEmpty()) {
                             showDialog = true
-                        } else{
-                            Toast.makeText(context, "Cart is empty, please add then order", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Cart is empty, please add then order",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 },
@@ -284,6 +272,29 @@ fun CartTab(modifier: Modifier) {
             }
 
             null -> {}
+        }
+    }
+}
+
+@Composable
+fun EmptyShoppingCart() {
+    Box(
+        modifier = Modifier
+            .height((ScreenDimensions.screenHeightDp / 1.7).dp)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.RemoveShoppingCart,
+                contentDescription = "Empty shopping cart"
+            )
+            Text(text = "Nothing in your cart yet...")
         }
     }
 }

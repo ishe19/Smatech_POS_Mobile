@@ -18,6 +18,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.gson.Gson
 import tech.ishe.smatechpos.data.models.ProductModel
 import tech.ishe.smatechpos.ui.theme.SmatechPOSTheme
+import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.home.MainScreen
 import tech.ishe.smatechpos.views.home.ProductDetailsScreen
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val productsViewModel = ViewModelProvider(this)[ProductsViewModel::class.java]
+        val shoppingCartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
         enableEdgeToEdge()
         setContent {
 

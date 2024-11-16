@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -43,6 +44,7 @@ import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.CartItemModel
 import tech.ishe.smatechpos.ui.theme.GreenStart
 import tech.ishe.smatechpos.ui.theme.OrangeStart
+import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage
 
@@ -53,8 +55,13 @@ fun CartCard(cartItemModel: CartItemModel) {
     val productsViewModel: ProductsViewModel =
         ViewModelProvider(context as ComponentActivity)[ProductsViewModel::class.java]
 
+    val cartViewModel: CartViewModel =
+        ViewModelProvider(context)[CartViewModel::class.java]
+
 
     val product = cartItemModel.productModel
+
+
 
     var productQuantity by remember {
         mutableIntStateOf(cartItemModel.quantity)
@@ -73,8 +80,6 @@ fun CartCard(cartItemModel: CartItemModel) {
 
 
         Row(
-//            modifier = Modifier
-//                .padding(vertical = 2.dp, horizontal = 4.dp),
 
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
@@ -118,57 +123,74 @@ fun CartCard(cartItemModel: CartItemModel) {
                 )
             }
 
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(horizontal = 2.dp)
                     .fillMaxHeight()
                     .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
             ) {
-                Spacer(modifier = Modifier.width(10.dp))
-                IconButton(
-                    onClick = {productQuantity--}) {
-                    Icon(
-                        imageVector = Icons.Rounded.Remove, contentDescription ="Add Quantity",
-                        tint = OrangeStart)
-                }
-
-                Box(
+                Row(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(MaterialTheme.colorScheme.inverseOnSurface)
-                        .width(width / 3)
-                        .height(60.dp),
-                    contentAlignment = Alignment.Center
-                ){
-                    Text(
-                        text = "$productQuantity",
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding()
-                    )
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier.width(10.dp))
+                    IconButton(
+                        onClick = { 
+                             productQuantity--
+                            cartViewModel.updateCartItemQuantity(productQuantity, cartItemModel)
+                        }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Remove, contentDescription = "Add Quantity",
+                            tint = OrangeStart
+                        )
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
+                            .width(width / 3)
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "$productQuantity",
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding()
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            productQuantity++
+                            cartViewModel.updateCartItemQuantity(productQuantity, cartItemModel)
+                        }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Add, contentDescription = "Add Quantity",
+                            tint = GreenStart
+                        )
+                    }
                 }
 
-
-                IconButton(
-                    onClick = {productQuantity++}) {
-                    Icon(imageVector = Icons.Rounded.Add, contentDescription ="Add Quantity",
-                        tint =   GreenStart)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    IconButton(onClick = {
+                        cartViewModel.removeFromCart(cartItemModel)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Rounded.DeleteOutline,
+                            contentDescription = "Delete",
+                            tint = Color.Red
+                        )
+                    }
                 }
-//                Button(
-//                    modifier = Modifier
-//                        .height(width / 4)
-//                        .width(width / 3),
-//                    colors = ButtonDefaults.buttonColors(
-//                        containerColor = GreenStart
-//                    ),
-//                    onClick = {
-//                        productQuantity++
-//                    }) {
-//                    Icon(imageVector = Icons.Rounded.Add, contentDescription ="Add Quantity",
-//                        tint = Color.White)
-//                }
             }
 
         }

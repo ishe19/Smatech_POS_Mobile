@@ -144,7 +144,7 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height((ScreenDimensions.screenHeightDp / 3).dp)
+                    .height((ScreenDimensions.screenHeightDp * 0.25).dp)
             ) {
                 ProductImage(productModel.productSku, productsViewModel)
             }

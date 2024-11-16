@@ -26,6 +26,7 @@ import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.cart.CartTab
 import tech.ishe.smatechpos.views.receipts.ReceiptsTab
+import tech.ishe.smatechpos.views.utils.LoadingOverlay
 import tech.ishe.smatechpos.views.utils.barItems
 
 @Composable
@@ -57,12 +58,10 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
                             icon = {
 
                                 BadgedBox(badge = {
-                                    if (index == 1) {
-                                    Badge(){
-                                            val cartCount = cartViewModel.cartList.value?.size
-                                            if (cartCount != null) {
-                                                Text(text = cartCount.toString())
-                                            }
+                                    val cartCount = cartViewModel.cartList.value?.size
+                                    if (index == 1 && cartCount != null) {
+                                        Badge() {
+                                            Text(text = cartCount.toString())
                                         }
                                     }
                                 }) {
@@ -72,8 +71,6 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
                                         tint = MaterialTheme.colorScheme.onBackground
                                     )
                                 }
-
-
                             },
                             label = {
                                 Text(
@@ -95,22 +92,6 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
             productsViewModel,
             navController
         )
-//        Column(
-//        ) {
-//
-//            NavHost(
-//                navController = navController,
-//                startDestination = "home",
-//                modifier = Modifier.padding(innerPadding),
-//                builder = {
-//                    composable("home") { HomeTab(viewModel = productsViewModel, navController) }
-//                    composable("cart") { CartTab() }
-//                    composable("receipts") { ReceiptsTab() }
-//
-//                }
-//            )
-//
-//        }
     }
 }
 

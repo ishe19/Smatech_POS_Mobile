@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -43,6 +44,8 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
     val cartViewModel: CartViewModel =
         ViewModelProvider(context as ComponentActivity)[CartViewModel::class.java]
 
+    val cartListState = cartViewModel.cartList.observeAsState()
+
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
@@ -64,7 +67,7 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
                             icon = {
 
                                 BadgedBox(badge = {
-                                    val cartCount = cartViewModel.cartList.value?.size
+                                    val cartCount = cartListState.value?.size
                                     if (index == 1 && cartCount != null) {
                                         Badge() {
                                             Text(text = cartCount.toString())

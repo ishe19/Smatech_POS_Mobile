@@ -31,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -95,9 +96,14 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
                 ) {
                     Button(
                         onClick = {
-                            val cartItemModel = CartItemModel(productModel, productCount)
-                            cartViewModel.addToCart(cartItemModel)
-                            Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
+                           if(productCount > 0){
+                               val cartItemModel = CartItemModel(productModel, productCount)
+                               cartViewModel.addToCart(cartItemModel)
+                               Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
+                           } else {
+                               Toast.makeText(context, "Please select a valid quantity", Toast.LENGTH_SHORT).show()
+
+                           }
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent

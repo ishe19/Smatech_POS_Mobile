@@ -27,16 +27,13 @@ import tech.ishe.smatechpos.data.models.OrderModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.views.receipts.widgets.ReceiptCard
+import tech.ishe.smatechpos.views.utils.ScreenDimensions
 
-@Preview(showBackground = true)
 @Composable
-fun ReceiptsTab(navController: NavController) {
+fun ReceiptsTab(navController: NavController, modifier: Modifier) {
     val context = LocalContext.current
     val ordersViewModel: OrdersViewModel =
         ViewModelProvider(context as ComponentActivity)[OrdersViewModel::class.java]
-
-    val loadingViewModel: LoadingViewModel =
-        ViewModelProvider(context)[LoadingViewModel::class.java]
 
     LaunchedEffect(Unit) {
         ordersViewModel.getOrders()
@@ -47,11 +44,10 @@ fun ReceiptsTab(navController: NavController) {
     var receiptsList: List<OrderModel>
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(vertical = 32.dp, horizontal = 4.dp),
+            .padding(vertical = 2.dp, horizontal = 4.dp),
     ) {
-        Spacer(modifier = Modifier.height(24.dp))
 
         when (val result = ordersResult.value) {
             is NetworkResponse.Error -> {
@@ -88,7 +84,13 @@ fun ReceiptsTab(navController: NavController) {
                 ) {
                     if (receiptsList.isEmpty()) {
                         item {
-                            Text(text = "No order receipts at the moment...")
+                            Box(modifier = Modifier
+                                .height((ScreenDimensions.screenHeightDp * 0.8).dp)
+                                .fillParentMaxWidth(),
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(text = "No order receipts at the moment...")
+                            }
                         }
                     } else {
                         items(receiptsList.size) { index ->

@@ -32,14 +32,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradient
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +50,6 @@ import tech.ishe.smatechpos.data.models.ProductModel
 import tech.ishe.smatechpos.ui.theme.GreenEnd
 import tech.ishe.smatechpos.ui.theme.GreenStart
 import tech.ishe.smatechpos.ui.theme.OrangeStart
-import tech.ishe.smatechpos.ui.theme.PurpleStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage
@@ -95,9 +92,14 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
                 ) {
                     Button(
                         onClick = {
-                            val cartItemModel = CartItemModel(productModel, productCount)
-                            cartViewModel.addToCart(cartItemModel)
-                            Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
+                           if(productCount > 0){
+                               val cartItemModel = CartItemModel(productModel, productCount)
+                               cartViewModel.addToCart(cartItemModel)
+                               Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
+                           } else {
+                               Toast.makeText(context, "Please select a valid quantity", Toast.LENGTH_SHORT).show()
+
+                           }
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Transparent
@@ -119,7 +121,6 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
                     text = "Product Details",
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Bold,
-//                textAlign = TextAlign.Center
                 ) },
                 navigationIcon = {
                     IconButton(onClick = {
@@ -135,6 +136,7 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
         Column(
             modifier = Modifier
                 .padding(innerPadding)
+                .padding(4.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -175,10 +177,16 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
                 .height(1.dp)
                 .fillMaxWidth()
                 .padding(horizontal = 30.dp)
-                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .background(OrangeStart)
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text="Description",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign= TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
+                )
             Text(text = productModel.description,
                 textAlign = TextAlign.Justify,
                 modifier = Modifier

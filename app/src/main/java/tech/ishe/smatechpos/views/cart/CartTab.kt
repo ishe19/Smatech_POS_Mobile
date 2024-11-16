@@ -51,14 +51,12 @@ import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.views.cart.widgets.CartCard
-import tech.ishe.smatechpos.views.utils.LoadingOverlay
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient
 import java.util.Locale
 
-@Preview(showBackground = true)
 @Composable
-fun CartTab() {
+fun CartTab(modifier: Modifier) {
 
     val context = LocalContext.current
     val cartViewModel: CartViewModel =
@@ -67,7 +65,9 @@ fun CartTab() {
     val loadingViewModel: LoadingViewModel =
         ViewModelProvider(context)[LoadingViewModel::class.java]
 
-    val cartList = cartViewModel.cartList.value
+    val cartListState = cartViewModel.cartList.observeAsState()
+
+    val cartList = cartListState.value
     var subtotal = 0.0
     var deliveryFee = 0.0
     var total = 0.0
@@ -77,18 +77,17 @@ fun CartTab() {
 
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(vertical = 32.dp, horizontal = 4.dp),
+            .padding(vertical = 2.dp, horizontal = 4.dp),
     ) {
 
-        Spacer(modifier = Modifier.height(24.dp))
         Box(
             modifier = Modifier
                 .height((ScreenDimensions.screenHeightDp / 1.7).dp)
                 .padding(4.dp)
                 .clip(RoundedCornerShape(15.dp))
-                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .background(MaterialTheme.colorScheme.primaryContainer)
         ) {
             LazyColumn(
                 modifier = Modifier
@@ -98,25 +97,7 @@ fun CartTab() {
                 if (cartList != null) {
                     if (cartList.isEmpty()) {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .height((ScreenDimensions.screenHeightDp / 1.7).dp)
-                                    .fillMaxWidth(),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize(),
-                                    verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Rounded.RemoveShoppingCart,
-                                        contentDescription = "Empty shopping cart"
-                                    )
-                                    Text(text = "Nothing in your cart yet...")
-                                }
-                            }
+                            EmptyShoppingCart()
                         }
                     } else {
                         items(cartList.size) { index ->
@@ -124,6 +105,8 @@ fun CartTab() {
                         }
                     }
 
+                } else {
+                    item { EmptyShoppingCart() }
                 }
             }
         }
@@ -211,10 +194,14 @@ fun CartTab() {
             Button(
                 onClick = {
                     if (cartList != null) {
-                        if(cartList.isNotEmpty()){
+                        if (cartList.isNotEmpty()) {
                             showDialog = true
-                        } else{
-                            Toast.makeText(context, "Cart is empty, please add then order", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Cart is empty, please add then order",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 },
@@ -285,6 +272,29 @@ fun CartTab() {
             }
 
             null -> {}
+        }
+    }
+}
+
+@Composable
+fun EmptyShoppingCart() {
+    Box(
+        modifier = Modifier
+            .height((ScreenDimensions.screenHeightDp / 1.7).dp)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.RemoveShoppingCart,
+                contentDescription = "Empty shopping cart"
+            )
+            Text(text = "Nothing in your cart yet...")
         }
     }
 }

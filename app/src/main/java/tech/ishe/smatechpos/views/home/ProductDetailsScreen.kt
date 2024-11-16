@@ -16,15 +16,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -42,6 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import tech.ishe.smatechpos.data.models.CartItemModel
 import tech.ishe.smatechpos.data.models.ProductModel
 import tech.ishe.smatechpos.ui.theme.GreenEnd
@@ -54,8 +59,9 @@ import tech.ishe.smatechpos.views.utils.ProductImage
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailsScreen(productModel: ProductModel) {
+fun ProductDetailsScreen(productModel: ProductModel, navController:NavController) {
     val context = LocalContext.current
     val productsViewModel: ProductsViewModel =
         ViewModelProvider(context as ComponentActivity)[ProductsViewModel::class.java]
@@ -106,6 +112,24 @@ fun ProductDetailsScreen(productModel: ProductModel) {
                     }
                 }
             }
+        },
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = "Product Details",
+                    modifier = Modifier.fillMaxWidth(),
+                    fontWeight = FontWeight.Bold,
+//                textAlign = TextAlign.Center
+                ) },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    },
+                    ) {
+                        Icon(imageVector = Icons.Rounded.ArrowBackIosNew, contentDescription = "back")
+                    }
+                }
+            )
         }
     ) { innerPadding ->
         Column(

@@ -8,6 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import tech.ishe.smatechpos.data.models.GenericResponse
 import tech.ishe.smatechpos.data.models.OrderRequest
+import tech.ishe.smatechpos.data.models.OrdersResponseModel
 import tech.ishe.smatechpos.data.models.ProductsResponseModel
 
 interface PosApi {
@@ -17,7 +18,7 @@ interface PosApi {
 
     @GET("products/{productSku}/image")
     suspend fun getProductImage(
-       @Path("productSku") productSku: String
+        @Path("productSku") productSku: String
     ): Response<ResponseBody>
 
 
@@ -25,4 +26,7 @@ interface PosApi {
     suspend fun postOrder(
         @Body orderRequest: OrderRequest
     ): Response<GenericResponse>
+
+    @GET("orders/")
+    suspend fun getOrders(): Response<OrdersResponseModel>
 }

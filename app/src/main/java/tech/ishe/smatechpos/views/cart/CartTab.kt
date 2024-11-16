@@ -65,7 +65,9 @@ fun CartTab(modifier: Modifier) {
     val loadingViewModel: LoadingViewModel =
         ViewModelProvider(context)[LoadingViewModel::class.java]
 
-    val cartList = cartViewModel.cartList.value
+    val cartListState = cartViewModel.cartList.observeAsState()
+
+    val cartList = cartListState.value
     var subtotal = 0.0
     var deliveryFee = 0.0
     var total = 0.0
@@ -85,7 +87,7 @@ fun CartTab(modifier: Modifier) {
                 .height((ScreenDimensions.screenHeightDp / 1.7).dp)
                 .padding(4.dp)
                 .clip(RoundedCornerShape(15.dp))
-                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .background(MaterialTheme.colorScheme.primaryContainer)
         ) {
             LazyColumn(
                 modifier = Modifier

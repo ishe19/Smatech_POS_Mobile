@@ -10,13 +10,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.OrderModel
+import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
+import tech.ishe.smatechpos.views.receipts.widgets.ReceiptCard
 
 @Preview(showBackground = true)
 @Composable
@@ -24,6 +27,11 @@ fun ReceiptsTab() {
     val context = LocalContext.current
     val ordersViewModel: OrdersViewModel = ViewModelProvider(context as ComponentActivity)[OrdersViewModel::class.java]
 
+    val loadingViewModel: LoadingViewModel =
+        ViewModelProvider(context)[LoadingViewModel::class.java]
+//    LaunchedEffect {
+//
+//    }
 
     var receiptsList: List<OrderModel> = emptyList()
 
@@ -32,7 +40,7 @@ fun ReceiptsTab() {
             .fillMaxSize()
             .padding(vertical = 32.dp, horizontal = 4.dp),
     ) {
-
+        loadingViewModel.isLoading(true)
         Spacer(modifier = Modifier.height(24.dp))
 
         LazyColumn (

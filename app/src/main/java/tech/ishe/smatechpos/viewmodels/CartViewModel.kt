@@ -14,16 +14,16 @@ class CartViewModel : ViewModel() {
     fun addToCart(cartItemModel: CartItemModel) {
         val index =
             _cartList.value?.indexOfFirst { it.productModel.productSku == cartItemModel.productModel.productSku }
-        if (index != -1) {
-            val oldItemInList = index?.let { _cartList.value?.get(it) }
-            val quantity = cartItemModel.quantity + (oldItemInList?.quantity ?: 0)
-            updateCartItemQuantity(quantity, cartItemModel)
-        } else {
-            val currentList = _cartList.value ?: emptyList()
-            _cartList.value = currentList + cartItemModel
-        }
+        if (index != null && index >= 0) {
+            val oldItemInList = _cartList.value?.get(index)
+            val newQuantity = cartItemModel.quantity + (oldItemInList?.quantity ?: 0)
 
+            updateCartItemQuantity(newQuantity, cartItemModel)
+        } else {
+            _cartList.value = _cartList.value?.plus(cartItemModel) ?: listOf(cartItemModel)
+        }
     }
+
 
     // Removing from the cart
     fun removeFromCart(cartItemModel: CartItemModel) {

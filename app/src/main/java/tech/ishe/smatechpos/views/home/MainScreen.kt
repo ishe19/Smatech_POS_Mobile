@@ -31,7 +31,8 @@ fun MainScreen(productsViewModel: ProductsViewModel, navController: NavControlle
         mutableIntStateOf(0)
     }
 
-    Scaffold(modifier = Modifier.fillMaxSize(),
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar {
                 Row(

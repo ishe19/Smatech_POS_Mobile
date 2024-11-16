@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,7 +34,7 @@ import tech.ishe.smatechpos.views.utils.Routes
 
 @Composable
 fun ProductCard(product: ProductModel, productsViewModel: ProductsViewModel, navController: NavController) {
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
@@ -45,10 +46,16 @@ fun ProductCard(product: ProductModel, productsViewModel: ProductsViewModel, nav
             .background(MaterialTheme.colorScheme.inverseOnSurface),
 
         ) {
+        val boxWithConstraintsScope = this
+        val width = boxWithConstraintsScope.maxWidth / 3
+
 
         Row(horizontalArrangement = Arrangement.SpaceEvenly) {
 
-            ProductImage(product.productSku, productsViewModel)
+            Box(modifier = Modifier.width(width - 40.dp)) {
+                ProductImage(product.productSku, productsViewModel)
+            }
+
             Spacer(
                 modifier = Modifier
                     .width(16.dp)

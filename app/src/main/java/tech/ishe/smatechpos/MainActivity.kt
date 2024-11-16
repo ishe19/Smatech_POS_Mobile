@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -21,6 +22,7 @@ import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.home.MainScreen
 import tech.ishe.smatechpos.views.home.ProductDetailsScreen
 import tech.ishe.smatechpos.views.utils.Routes
+import tech.ishe.smatechpos.views.utils.ScreenDimensions
 
 class MainActivity : ComponentActivity() {
 
@@ -31,6 +33,9 @@ class MainActivity : ComponentActivity() {
         val productsViewModel = ViewModelProvider(this)[ProductsViewModel::class.java]
         enableEdgeToEdge()
         setContent {
+
+            val configuration = LocalConfiguration.current
+            ScreenDimensions.initialize(configuration)
             SmatechPOSTheme {
                 val navController = rememberNavController()
 

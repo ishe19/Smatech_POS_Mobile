@@ -22,6 +22,7 @@ import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
+import tech.ishe.smatechpos.viewmodels.SearchViewModel
 import tech.ishe.smatechpos.views.home.MainScreen
 import tech.ishe.smatechpos.views.home.ProductDetailsScreen
 import tech.ishe.smatechpos.views.receipts.ReceiptDetailsScreen
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
         val shoppingCartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
         val ordersViewModel = ViewModelProvider(this)[OrdersViewModel::class.java]
         val loadingViewModel = ViewModelProvider(this)[LoadingViewModel::class.java]
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         enableEdgeToEdge()
         setContent {
 

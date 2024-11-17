@@ -47,9 +47,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import tech.ishe.smatechpos.data.models.CartItemModel
 import tech.ishe.smatechpos.data.models.ProductModel
-import tech.ishe.smatechpos.ui.theme.GreenEnd
-import tech.ishe.smatechpos.ui.theme.GreenStart
-import tech.ishe.smatechpos.ui.theme.OrangeStart
+import tech.ishe.smatechpos.views.utils.theme.GreenEnd
+import tech.ishe.smatechpos.views.utils.theme.GreenStart
+import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage

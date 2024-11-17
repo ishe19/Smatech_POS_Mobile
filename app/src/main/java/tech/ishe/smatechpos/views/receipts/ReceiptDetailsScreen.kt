@@ -44,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import tech.ishe.smatechpos.data.models.OrderModel
-import tech.ishe.smatechpos.ui.theme.OrangeEnd
-import tech.ishe.smatechpos.ui.theme.OrangeStart
+import tech.ishe.smatechpos.views.utils.theme.OrangeEnd
+import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.views.receipts.widgets.OrderedItemCard
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient

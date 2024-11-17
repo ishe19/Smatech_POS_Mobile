@@ -44,9 +44,9 @@ import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.NetworkResponse
 import tech.ishe.smatechpos.data.models.OrderItemRequest
 import tech.ishe.smatechpos.data.models.OrderRequest
-import tech.ishe.smatechpos.ui.theme.GreenEnd
-import tech.ishe.smatechpos.ui.theme.GreenStart
-import tech.ishe.smatechpos.ui.theme.OrangeStart
+import tech.ishe.smatechpos.views.utils.theme.GreenEnd
+import tech.ishe.smatechpos.views.utils.theme.GreenStart
+import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel

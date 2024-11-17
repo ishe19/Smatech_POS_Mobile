@@ -9,15 +9,20 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import tech.ishe.smatechpos.data.models.OrderModel
 import tech.ishe.smatechpos.data.models.ProductModel
-import tech.ishe.smatechpos.ui.theme.SmatechPOSTheme
+import tech.ishe.smatechpos.views.utils.theme.SmatechPOSTheme
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
@@ -42,6 +47,15 @@ class MainActivity : ComponentActivity() {
         val loadingViewModel = ViewModelProvider(this)[LoadingViewModel::class.java]
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         enableEdgeToEdge()
+
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition{true}
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(3000L)
+            splashScreen.setKeepOnScreenCondition{false}
+        }
+
         setContent {
 
             val configuration = LocalConfiguration.current

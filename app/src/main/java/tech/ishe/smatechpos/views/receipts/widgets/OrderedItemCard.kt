@@ -84,6 +84,7 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
 
                 Row(
                     modifier = Modifier
+                        .padding(horizontal = 4.dp)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {

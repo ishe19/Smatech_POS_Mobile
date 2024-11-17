@@ -1,4 +1,4 @@
-package tech.ishe.smatechpos.ui.theme
+package tech.ishe.smatechpos.views.utils.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

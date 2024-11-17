@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.CartItemModel
-import tech.ishe.smatechpos.ui.theme.GreenStart
-import tech.ishe.smatechpos.ui.theme.OrangeStart
+import tech.ishe.smatechpos.views.utils.theme.GreenStart
+import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage

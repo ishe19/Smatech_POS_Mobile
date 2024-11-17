@@ -74,4 +74,5 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.core.splashscreen)
 }

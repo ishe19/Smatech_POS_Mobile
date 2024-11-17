@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base theme for devices with Android 12 and above -->
+    <style name="Theme.SmatechPOS.Splash" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Splash Screen Background for Android 12+ -->
+        <item name="android:windowSplashScreenBackground">#FFFFFF</item>
+        <!-- Optional: Splash Screen Icon for Android 12+ -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/original_splash</item>
+    </style>
+
+    <!-- Base theme for devices below Android 12 -->
+    <style name="Theme.SmatechPOS.Legacy" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Background for the splash screen -->
+        <item name="android:windowBackground">@drawable/original_splash</item>
+    </style>
+</resources>

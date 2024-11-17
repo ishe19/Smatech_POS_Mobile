@@ -1,6 +1,8 @@
 package tech.ishe.smatechpos.views.receipts
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
@@ -43,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import tech.ishe.smatechpos.R
 import tech.ishe.smatechpos.data.models.OrderModel
 import tech.ishe.smatechpos.views.utils.theme.OrangeEnd
 import tech.ishe.smatechpos.views.utils.theme.OrangeStart
@@ -285,13 +288,22 @@ fun saveReceiptAsPdf(context: Context, orderModel: OrderModel) {
         strokeWidth = 2f
     }
 
-    val startX = 40f
-    var startY = 100f
-    canvas.drawText("Order Details", startX, startY, titlePaint)
+    val image1 = BitmapFactory.decodeResource(context.resources, R.drawable.original)
+
+    val imageHeight = 300
+    val imageWidth = 300
+
+    val imageY = 20f
+    canvas.drawBitmap(Bitmap.createScaledBitmap(image1, imageWidth, imageHeight, false), 40f, imageY, null)
+
+    var startY = imageY + imageHeight + 40f
+
+    // Draw title
+    canvas.drawText("Order Details", 40f, startY, titlePaint)
     startY += 60f
 
     fun drawRow(label: String, value: String) {
-        canvas.drawText(label, startX, startY, contentPaint)
+        canvas.drawText(label, 40f, startY, contentPaint)
         canvas.drawText(value, pageWidth - 600f, startY, contentPaint)
         startY += 40f
     }
@@ -303,14 +315,14 @@ fun saveReceiptAsPdf(context: Context, orderModel: OrderModel) {
     drawRow("Order Total:", "$${String.format(Locale.UK, "%.2f", orderModel.total)}")
 
     startY += 20f
-    canvas.drawLine(startX, startY, pageWidth - 40f, startY, linePaint)
+    canvas.drawLine(40f, startY, pageWidth - 40f, startY, linePaint)
     startY += 40f
 
-    canvas.drawText("Ordered Products", startX, startY, titlePaint)
+    canvas.drawText("Ordered Products", 40f, startY, titlePaint)
     startY += 60f
 
     for (item in orderModel.orderedItems) {
-        canvas.drawText(item.productName, startX, startY, contentPaint)
+        canvas.drawText(item.productName, 40f, startY, contentPaint)
         canvas.drawText("Price: $${item.price}", pageWidth - 500f, startY, contentPaint)
         canvas.drawText("Qty: ${item.quantity}", pageWidth - 200f, startY, contentPaint)
         startY += 40f
@@ -319,7 +331,7 @@ fun saveReceiptAsPdf(context: Context, orderModel: OrderModel) {
     pdfDocument.finishPage(page)
 
     val outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-    val outputFile = File(outputDir, "receipt_${orderModel.orderCode.substring(0,8)}.pdf")
+    val outputFile = File(outputDir, "receipt_${orderModel.orderCode.substring(0, 8)}.pdf")
     FileOutputStream(outputFile).use { fos ->
         pdfDocument.writeTo(fos)
     }
@@ -328,6 +340,75 @@ fun saveReceiptAsPdf(context: Context, orderModel: OrderModel) {
 
     Toast.makeText(context, "PDF saved to: ${outputFile.absolutePath}", Toast.LENGTH_SHORT).show()
 }
+
+
+//fun saveReceiptAsPdf(context: Context, orderModel: OrderModel) {
+//    val pdfDocument = PdfDocument()
+//
+//    val pageWidth = 1080
+//    val pageHeight = 1920
+//    val pageInfo = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create()
+//
+//    val page = pdfDocument.startPage(pageInfo)
+//    val canvas = page.canvas
+//
+//    val titlePaint = Paint().apply {
+//        color = Colour.BLACK
+//        textSize = 36f
+//        typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+//    }
+//    val contentPaint = Paint().apply {
+//        color = Colour.BLACK
+//        textSize = 28f
+//    }
+//    val linePaint = Paint().apply {
+//        color = Colour.LTGRAY
+//        strokeWidth = 2f
+//    }
+//
+//    val startX = 40f
+//    var startY = 100f
+//    canvas.drawText("Order Details", startX, startY, titlePaint)
+//    startY += 60f
+//
+//    fun drawRow(label: String, value: String) {
+//        canvas.drawText(label, startX, startY, contentPaint)
+//        canvas.drawText(value, pageWidth - 600f, startY, contentPaint)
+//        startY += 40f
+//    }
+//
+//    drawRow("Order Ref:", orderModel.orderCode)
+//    drawRow("Ordered Items:", orderModel.orderedItems.size.toString())
+//    drawRow("Delivery Fee:", "$${String.format(Locale.UK, "%.2f", orderModel.deliverFee)}")
+//    drawRow("Subtotal:", "$${String.format(Locale.UK, "%.2f", orderModel.subTotal)}")
+//    drawRow("Order Total:", "$${String.format(Locale.UK, "%.2f", orderModel.total)}")
+//
+//    startY += 20f
+//    canvas.drawLine(startX, startY, pageWidth - 40f, startY, linePaint)
+//    startY += 40f
+//
+//    canvas.drawText("Ordered Products", startX, startY, titlePaint)
+//    startY += 60f
+//
+//    for (item in orderModel.orderedItems) {
+//        canvas.drawText(item.productName, startX, startY, contentPaint)
+//        canvas.drawText("Price: $${item.price}", pageWidth - 500f, startY, contentPaint)
+//        canvas.drawText("Qty: ${item.quantity}", pageWidth - 200f, startY, contentPaint)
+//        startY += 40f
+//    }
+//
+//    pdfDocument.finishPage(page)
+//
+//    val outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+//    val outputFile = File(outputDir, "receipt_${orderModel.orderCode.substring(0,8)}.pdf")
+//    FileOutputStream(outputFile).use { fos ->
+//        pdfDocument.writeTo(fos)
+//    }
+//
+//    pdfDocument.close()
+//
+//    Toast.makeText(context, "PDF saved to: ${outputFile.absolutePath}", Toast.LENGTH_SHORT).show()
+//}
 
 
 

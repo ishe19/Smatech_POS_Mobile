@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
@@ -137,29 +139,31 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(4.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height((ScreenDimensions.screenHeightDp * 0.25).dp)
+                    .height((ScreenDimensions.screenHeightDp * 0.3).dp)
             ) {
                 ProductImage(productModel.productSku, productsViewModel)
             }
             Spacer(modifier = Modifier.height(24.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = productModel.productName,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start)
-                Text(text = "$${productModel.price}")
-            }
+
+            Text(text = productModel.productName,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start)
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(text = "Price: $${productModel.price}",
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
+                )
 
             Spacer(modifier = Modifier.height(4.dp))
 

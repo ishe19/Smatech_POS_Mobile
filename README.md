@@ -1,9 +1,9 @@
 # Smatech POS Mobile App
 
-##This is a kotlin based Point Of Sale (POS) application that utilises the most basic form of MVVM architecture and state management.
+## This is a kotlin based Point Of Sale (POS) application that utilises the most basic form of MVVM architecture and state management.
 
 
-##Features
+## Features
 - Get a list of products from the REST API
 - Searching for a product among the products
 - Viewing products in detail
@@ -12,72 +12,69 @@
 - Viewing receipts of past orders
 - Generating PDF for receipts
 
-##Dependencies
+## Dependencies
 
 The following dependencies are used in this project:
 
-###androidx.core:core-ktx
+### androidx.core:core-ktx
 Provides Kotlin extensions for Android APIs, simplifying tasks such as property delegation and lifecycle-aware components.
 
-###androidx.lifecycle:lifecycle-runtime-ktx
+### androidx.lifecycle:lifecycle-runtime-ktx
 Adds Kotlin extensions for lifecycle-aware components, making it easier to handle lifecycle events in a reactive manner.
 
-###androidx.activity:activity-compose
+### androidx.activity:activity-compose
 Supports Jetpack Compose integration with Activity for seamless navigation and UI handling.
 
-###androidx.compose:compose-bom
+### androidx.compose:compose-bom
 Ensures consistent versions of Compose libraries by using the Bill of Materials (BOM).
 
-###androidx.ui
+### androidx.ui
 Enables declarative UI development with Jetpack Compose.
 
-###androidx.ui:ui-graphics
+### androidx.ui:ui-graphics
 Provides graphics utilities for Jetpack Compose, including rendering and drawing functionalities.
 
-###androidx.ui:ui-tooling-preview
+### androidx.ui:ui-tooling-preview
 Allows previewing Compose UIs directly in Android Studio without running the app.
 
-###androidx.compose.material3:material3
+### androidx.compose.material3:material3
 Supports Material Design 3 components and theming for Jetpack Compose.
 
-a###ndroidx.compose.material:material
+### androidx.compose.material:material
 Implements Material Design 2 components for Jetpack Compose.
 
-###androidx.compose.material:material-icons-extended
+### androidx.compose.material:material-icons-extended
 Provides an extended set of Material Design icons for Compose-based UI.
 
-###androidx.navigation:navigation-compose
+### androidx.navigation:navigation-compose
 Adds support for navigation in Compose applications with the Jetpack Navigation component.
 
-###junit:junit
+### junit:junit
 Includes the JUnit library for unit testing.
 
-###androidx.test.ext:junit
+### androidx.test.ext:junit
 Provides Android-specific JUnit extensions for UI testing.
 
-###androidx.test.espresso:espresso-core
+### androidx.test.espresso:espresso-core
 Facilitates Android UI testing with Espresso, allowing simulation and validation of user interactions.
 
-###androidx.compose:ui-test-junit4
+### androidx.compose:ui-test-junit4
 Enables JUnit4-based UI testing for Compose applications.
 
-###androidx.ui:ui-tooling
+### androidx.ui:ui-tooling
 Supports debugging and inspection of Compose UIs in debug builds.
 
-###androidx.ui:ui-test-manifest
+### androidx.ui:ui-test-manifest
 Helps debug issues related to the AndroidManifest file during UI testing.
 
-###com.squareup.retrofit2:retrofit
+### com.squareup.retrofit2:retrofit
 A type-safe HTTP client for making REST API requests.
 
-###com.squareup.retrofit2:converter-gson
+### com.squareup.retrofit2:converter-gson
 Adds Gson support for serialization and deserialization of JSON data in Retrofit.
 
-###androidx.runtime:runtime-livedata
+### androidx.runtime:runtime-livedata
 Enables the use of LiveData in Jetpack Compose for reactive data handling.
-
-
-Here's a version of the **Installation** section tailored for your Kotlin application setup:  
 
 ---
 

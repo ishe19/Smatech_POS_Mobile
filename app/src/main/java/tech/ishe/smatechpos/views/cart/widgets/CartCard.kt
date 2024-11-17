@@ -80,7 +80,6 @@ fun CartCard(cartItemModel: CartItemModel) {
 
 
         Row(
-
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
@@ -137,9 +136,14 @@ fun CartCard(cartItemModel: CartItemModel) {
                 ) {
                     Spacer(modifier = Modifier.width(10.dp))
                     IconButton(
-                        onClick = { 
-                             productQuantity--
-                            cartViewModel.updateCartItemQuantity(productQuantity, cartItemModel)
+                        onClick = {
+
+                            productQuantity--
+                             if(productQuantity == 0){
+                                 cartViewModel.removeFromCart(cartItemModel)
+                             } else{
+                                 cartViewModel.updateCartItemQuantity(productQuantity, cartItemModel)
+                             }
                         }) {
                         Icon(
                             imageVector = Icons.Rounded.Remove, contentDescription = "Add Quantity",

@@ -49,6 +49,8 @@ import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.views.receipts.widgets.OrderedItemCard
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient
+import tech.ishe.smatechpos.views.utils.theme.GreenEnd
+import tech.ishe.smatechpos.views.utils.theme.GreenStart
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Locale
@@ -91,7 +93,7 @@ fun ReceiptDetailsScreen(orderModel: OrderModel, navController: NavController) {
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(25.dp))
                         .background(
-                            brush = getGradient(OrangeStart, OrangeEnd),
+                            brush = getGradient(GreenStart, GreenEnd),
                             shape = RoundedCornerShape(8.dp)
                         )
                 ) {

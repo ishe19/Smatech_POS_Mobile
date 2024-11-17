@@ -20,7 +20,21 @@
 
 ### 4. **Receipt Management**  
 - View a comprehensive history of past orders with itemized details.  
-- Generate professional PDF receipts for easy sharing or printing.  
+- Generate professional PDF receipts for easy sharing or printing.
+
+  ---
+  
+## Important Notes:
+
+1. **Android SDK Requirement**:  
+   This application has a minimum Android SDK requirement of Android 12. Devices running versions lower than this may not be able to run the app. The limitation arises from a known compatibility issue with the Splash Screen API. While I am actively working on a fix, this note likely means the issue is still unresolved. (Yes, I know — still a work in progress! 😅)
+
+2. **API Hosting on Free Tier**:  
+   The REST API for this project is hosted on Render's free tier, which means the server instance may enter a "spin-down" state when idle. This can temporarily affect the app's ability to fetch products or process orders. To resolve this, simply visit the API documentation at [Swagger](https://smatech-pos-api.onrender.com/smatech_api/swagger-ui/index.html). Accessing the link should wake up the instance, allowing the app to function normally again.
+
+3. **REST API Documentation**:  
+   As part of the assignment requirements, I was tasked with showcasing the API requests and responses. The documentation linked above provides detailed information on all REST API endpoints, including their requests and responses.
+
 
 ---
 
@@ -123,21 +137,6 @@ To run the Kotlin App on your local machine, follow these steps:
 6. **Run the application**  
    - Connect an Android device or start an emulator.  
    - Select the **Run** button in Android Studio to build and run the app.
-
-  ---
-  
-## Important Notes:
-
-1. **Android SDK Requirement**:  
-   This application has a minimum Android SDK requirement of Android 12. Devices running versions lower than this may not be able to run the app. The limitation arises from a known compatibility issue with the Splash Screen API. While I am actively working on a fix, this note likely means the issue is still unresolved. (Yes, I know — still a work in progress! 😅)
-
-2. **API Hosting on Free Tier**:  
-   The REST API for this project is hosted on Render's free tier, which means the server instance may enter a "spin-down" state when idle. This can temporarily affect the app's ability to fetch products or process orders. To resolve this, simply visit the API documentation at [Swagger](https://smatech-pos-api.onrender.com/smatech_api/swagger-ui/index.html). Accessing the link should wake up the instance, allowing the app to function normally again.
-
-3. **REST API Documentation**:  
-   As part of the assignment requirements, I was tasked with showcasing the API requests and responses. The documentation linked above provides detailed information on all REST API endpoints, including their requests and responses.
-
-
 
 ---
 

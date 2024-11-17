@@ -1,16 +1,28 @@
-# Smatech POS Mobile App
+# Smatech POS Mobile App  
 
-## This is a kotlin based Point Of Sale (POS) application that utilises the most basic form of MVVM architecture and state management.
+**Smatech POS** is a Kotlin-based Point of Sale (POS) application that leverages a simple implementation of the **MVVM architecture** for clean separation of concerns and efficient state management. This app is designed to provide a seamless experience for managing products, orders, and receipts. 
 
+---
 
-## Features
-- Get a list of products from the REST API
-- Searching for a product among the products
-- Viewing products in detail
-- Adding products to a shopping cart
-- Placing orders to the server
-- Viewing receipts of past orders
-- Generating PDF for receipts
+## Features  
+
+### 1. **Product Management**  
+- Fetch a dynamic list of products from a REST API.  
+- Search for specific products using intuitive search functionality.  
+- View detailed information for each product, including price and descriptions.  
+
+### 2. **Cart Functionality**  
+- Add selected products to a shopping cart.  
+- Easily view and manage items in the cart before placing an order.  
+
+### 3. **Order Placement**  
+- Place orders directly to the server for real-time processing.  
+
+### 4. **Receipt Management**  
+- View a comprehensive history of past orders with itemized details.  
+- Generate professional PDF receipts for easy sharing or printing.  
+
+---
 
 ## Dependencies
 
@@ -133,6 +145,14 @@ The POS app is designed to streamline product selection, simplify the checkout p
 
 ---
 
-##Screenshots
+## Screenshots
 
+![Home Tab](https://github.com/ishe19/Smatech_POS_Mobile/blob/main/screenshots/Smatech1.png)
 
+![Product Details](https://github.com/ishe19/Smatech_POS_Mobile/blob/main/screenshots/Smatech2.png)
+
+![Shopping Cart](https://github.com/ishe19/Smatech_POS_Mobile/blob/main/screenshots/Smatech3.png)
+
+![Receipts Tab](https://github.com/ishe19/Smatech_POS_Mobile/blob/main/screenshots/Smatech4.png)
+
+![Receipt Details](https://github.com/ishe19/Smatech_POS_Mobile/blob/main/screenshots/Smatech5.png)

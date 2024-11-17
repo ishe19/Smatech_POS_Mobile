@@ -132,6 +132,7 @@ fun DetailsView(orderModel: OrderModel, modifier: Modifier) {
     ) {
         Column(
             modifier = Modifier
+                .padding(vertical = 10.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -226,8 +227,6 @@ fun DetailsView(orderModel: OrderModel, modifier: Modifier) {
                 }
             }
 
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             Spacer(
                 modifier = Modifier

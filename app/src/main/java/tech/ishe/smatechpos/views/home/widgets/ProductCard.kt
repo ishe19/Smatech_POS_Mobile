@@ -31,13 +31,14 @@ import tech.ishe.smatechpos.data.models.ProductModel
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage
 import tech.ishe.smatechpos.views.utils.Routes
+import tech.ishe.smatechpos.views.utils.ScreenDimensions
 
 @Composable
 fun ProductCard(product: ProductModel, productsViewModel: ProductsViewModel, navController: NavController) {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height((ScreenDimensions.screenHeightDp * 0.13).dp)
             .padding(8.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
@@ -79,11 +80,11 @@ fun ProductCard(product: ProductModel, productsViewModel: ProductsViewModel, nav
                 )
                 Spacer(
                     modifier = Modifier
-                        .height(5.dp)
+                        .height(10.dp)
                 )
 
                 Text(
-                    text = "$${product.price}",
+                    text = "Price: $${product.price}",
                     fontWeight = FontWeight.Medium,
                     overflow = TextOverflow.Ellipsis,
                     fontSize = 14.sp,

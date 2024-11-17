@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.OrderedItem
 import tech.ishe.smatechpos.viewmodels.ProductsViewModel
 import tech.ishe.smatechpos.views.utils.ProductImage
+import tech.ishe.smatechpos.views.utils.ScreenDimensions
 
 @Composable
 fun OrderedItemCard(orderItemModel: OrderedItem) {
@@ -40,7 +41,7 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height((ScreenDimensions.screenHeightDp * 0.13).dp)
             .padding(8.dp)
             .clip(RoundedCornerShape(15.dp))
             .background(MaterialTheme.colorScheme.inverseOnSurface),
@@ -72,6 +73,7 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
                 )
                 Text(
                     text = orderItemModel.productName,
+                    maxLines = 2,
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
                     fontSize = 16.sp,
@@ -79,7 +81,7 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
                 )
                 Spacer(
                     modifier = Modifier
-                        .height(5.dp)
+                        .height(10.dp)
                 )
 
                 Row(
@@ -89,7 +91,7 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "$${orderItemModel.price}",
+                        text = "Price: $${orderItemModel.price}",
                         fontWeight = FontWeight.Medium,
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 14.sp,
@@ -100,6 +102,11 @@ fun OrderedItemCard(orderItemModel: OrderedItem) {
                         fontWeight = FontWeight.Medium,
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 14.sp,
+                    )
+
+                    Spacer(
+                        modifier = Modifier
+                            .width(5.dp)
                     )
                 }
             }

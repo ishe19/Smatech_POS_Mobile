@@ -116,7 +116,10 @@ To run the Kotlin App on your local machine, follow these steps:
 
 6. **Run the application**  
    - Connect an Android device or start an emulator.  
-   - Select the **Run** button in Android Studio to build and run the app.  
+   - Select the **Run** button in Android Studio to build and run the app.
+  
+#### NB
+- This application has a high minimum android sdk requirement, which is android 12 and versions lower than that may fail to run the application (this was due to an error caused by the Splash Screen API having backwards compatibility issues, I am still trying to fix it but if you are reading this it probably means I haven't yet 😅)
 
 ---
 

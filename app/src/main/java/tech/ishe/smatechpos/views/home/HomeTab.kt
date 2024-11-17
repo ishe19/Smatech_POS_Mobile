@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -209,7 +210,16 @@ fun ProductsList(productsViewModel: ProductsViewModel, navController: NavControl
 
     when (val result = productsResult.value) {
         is NetworkResponse.Error -> {
-            Text(text = "Failed to load products...")
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = result.message,
+                    color = Color.Red
+                )
+            }
         }
 
         NetworkResponse.Loading -> {

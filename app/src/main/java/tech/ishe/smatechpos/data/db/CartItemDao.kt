@@ -10,7 +10,7 @@ import tech.ishe.smatechpos.data.models.CartItemModel
 interface CartItemDao {
 
     @Query("SELECT * FROM CARTITEMMODEL")
-    fun getCartItems() : LiveData<List<CartItemModel>>
+    fun getCartItems(): LiveData<List<CartItemModel>>
 
     @Insert
     fun addCartItem(cartItemModel: CartItemModel)

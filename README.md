@@ -118,8 +118,10 @@ To run the Kotlin App on your local machine, follow these steps:
    - Connect an Android device or start an emulator.  
    - Select the **Run** button in Android Studio to build and run the app.
   
-#### NB
-- This application has a high minimum android sdk requirement, which is android 12 and versions lower than that may fail to run the application (this was due to an error caused by the Splash Screen API having backwards compatibility issues, I am still trying to fix it but if you are reading this it probably means I haven't yet 😅)
+## Please Note:
+1. This application has a high minimum android sdk requirement, which is android 12 and versions lower than that may fail to run the application (this was due to an error caused by the Splash Screen API having backwards compatibility issues, I am still trying to fix it but if you are reading this it probably means I haven't yet 😅)
+2. The REST API for this project is hosted on render and the platform tends to spin down the instance which it is running on as it is running on the free tier of the platform, this does affect the application by it not being able to fetch products or the capability to send orders. To resolve this you may need to just access the api documentation here [Swagger](https://smatech-pos-api.onrender.com/smatech_api/swagger-ui/index.html) the instance should then spin up and the app should run just fine.
+3. In the instructions for the assignment, I was instructed to show the REST API requests and responses, the link above provides documentation on the REST API's requests and responses.
 
 ---
 

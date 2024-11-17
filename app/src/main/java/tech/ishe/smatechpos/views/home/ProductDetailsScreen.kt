@@ -95,7 +95,15 @@ fun ProductDetailsScreen(productModel: ProductModel, navController:NavController
                     Button(
                         onClick = {
                            if(productCount > 0){
-                               val cartItemModel = CartItemModel(productModel, productCount)
+
+                               val cartItemModel = CartItemModel(
+                                   productDescription = productModel.description,
+                                   productSku = productModel.productSku,
+                                   productName = productModel.productName,
+                                   quantity = productCount,
+                                   price = productModel.price,
+                                   id = 0,
+                               )
                                cartViewModel.addToCart(cartItemModel)
                                Toast.makeText(context, "${productModel.productName} added to cart", Toast.LENGTH_SHORT).show()
                            } else {

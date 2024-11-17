@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,8 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.Remove
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.CartItemModel
+import tech.ishe.smatechpos.data.models.ProductModel
 import tech.ishe.smatechpos.views.utils.theme.GreenStart
 import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
@@ -59,7 +57,12 @@ fun CartCard(cartItemModel: CartItemModel) {
         ViewModelProvider(context)[CartViewModel::class.java]
 
 
-    val product = cartItemModel.productModel
+    val product = ProductModel(
+        cartItemModel.productDescription,
+        cartItemModel.price,
+        cartItemModel.productName,
+        cartItemModel.productSku
+    )
 
 
 

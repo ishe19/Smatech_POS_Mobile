@@ -17,6 +17,8 @@ materialIconsExtendedVersion = "1.7.5"
 playServicesWallet = "19.4.0"
 navigationCompose = "2.8.4"
 retrofit = "2.11.0"
+roomCompiler = "2.6.1"
+roomRuntime = "2.6.1"
 runtimeLivedata = "1.7.5"
 
 [libraries]
@@ -24,6 +26,8 @@ accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-
 accompanist-systemuicontroller-v0360 = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontrollerVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

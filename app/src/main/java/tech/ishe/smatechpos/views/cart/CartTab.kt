@@ -37,22 +37,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import tech.ishe.smatechpos.data.models.NetworkResponse
 import tech.ishe.smatechpos.data.models.OrderItemRequest
 import tech.ishe.smatechpos.data.models.OrderRequest
-import tech.ishe.smatechpos.views.utils.theme.GreenEnd
-import tech.ishe.smatechpos.views.utils.theme.GreenStart
-import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import tech.ishe.smatechpos.viewmodels.CartViewModel
 import tech.ishe.smatechpos.viewmodels.LoadingViewModel
 import tech.ishe.smatechpos.viewmodels.OrdersViewModel
 import tech.ishe.smatechpos.views.cart.widgets.CartCard
 import tech.ishe.smatechpos.views.utils.ScreenDimensions
 import tech.ishe.smatechpos.views.utils.getGradient
+import tech.ishe.smatechpos.views.utils.theme.GreenEnd
+import tech.ishe.smatechpos.views.utils.theme.GreenStart
+import tech.ishe.smatechpos.views.utils.theme.OrangeStart
 import java.util.Locale
 
 @Composable
@@ -120,7 +119,7 @@ fun CartTab(modifier: Modifier) {
         {
 
             cartList?.forEach { item ->
-                subtotal += (item.productModel.price * item.quantity)
+                subtotal += (item.price * item.quantity)
             }
             val formattedSubtotal = String.format(Locale.UK, "%.2f", subtotal)
             Text(text = "Subtotal:")
@@ -234,7 +233,7 @@ fun CartTab(modifier: Modifier) {
                         var productsList: List<OrderItemRequest> = emptyList()
                         cartList?.forEach { item ->
                             val orderItemRequest =
-                                OrderItemRequest(item.productModel.productSku, item.quantity)
+                                OrderItemRequest(item.productSku, item.quantity)
                             productsList = productsList + orderItemRequest
                         }
 

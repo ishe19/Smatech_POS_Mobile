@@ -20,7 +20,21 @@
 
 ### 4. **Receipt Management**  
 - View a comprehensive history of past orders with itemized details.  
-- Generate professional PDF receipts for easy sharing or printing.  
+- Generate professional PDF receipts for easy sharing or printing.
+
+  ---
+  
+## Important Notes:
+
+1. **Android SDK Requirement**:  
+   This application has a minimum Android SDK requirement of Android 12. Devices running versions lower than this may not be able to run the app. The limitation arises from a known compatibility issue with the Splash Screen API. While I am actively working on a fix, this note likely means the issue is still unresolved. (Yes, I know — still a work in progress! 😅)
+
+2. **API Hosting on Free Tier**:  
+   The REST API for this project is hosted on Render's free tier, which means the server instance may enter a "spin-down" state when idle. This can temporarily affect the app's ability to fetch products or process orders. To resolve this, simply visit the API documentation at [Swagger](https://smatech-pos-api.onrender.com/smatech_api/swagger-ui/index.html). Accessing the link should wake up the instance, allowing the app to function normally again.
+
+3. **REST API Documentation**:  
+   As part of the assignment requirements, I was tasked with showcasing the API requests and responses. The documentation linked above provides detailed information on all REST API endpoints, including their requests and responses.
+
 
 ---
 
@@ -88,6 +102,12 @@ Adds Gson support for serialization and deserialization of JSON data in Retrofit
 ### androidx.runtime:runtime-livedata
 Enables the use of LiveData in Jetpack Compose for reactive data handling.
 
+### androidx.room
+Provides the essential runtime functionality for Room, a persistence library that simplifies SQLite database integration in Android apps. It helps developers work with structured data seamlessly while leveraging compile-time checks for SQL queries.
+
+### androidx.room
+Enables Kotlin-specific extensions for Room, such as coroutines support for database operations, making asynchronous programming more intuitive and concise.
+
 ---
 
 ## Installation  
@@ -117,11 +137,6 @@ To run the Kotlin App on your local machine, follow these steps:
 6. **Run the application**  
    - Connect an Android device or start an emulator.  
    - Select the **Run** button in Android Studio to build and run the app.
-  
-## Please Note:
-1. This application has a high minimum android sdk requirement, which is android 12 and versions lower than that may fail to run the application (this was due to an error caused by the Splash Screen API having backwards compatibility issues, I am still trying to fix it but if you are reading this it probably means I haven't yet 😅)
-2. The REST API for this project is hosted on render and the platform tends to spin down the instance which it is running on as it is running on the free tier of the platform, this does affect the application by it not being able to fetch products or the capability to send orders. To resolve this you may need to just access the api documentation here [Swagger](https://smatech-pos-api.onrender.com/smatech_api/swagger-ui/index.html) the instance should then spin up and the app should run just fine.
-3. In the instructions for the assignment, I was instructed to show the REST API requests and responses, the link above provides documentation on the REST API's requests and responses.
 
 ---
 

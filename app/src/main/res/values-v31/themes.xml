@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SmatechPOS" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.SmatechPOS.Splash" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowSplashScreenBackground">#FFFFFF</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/original_splash</item>
         <item name="android:windowSplashScreenAnimationDuration">5000</item>
+        <item name="postSplashScreenTheme">@style/Theme.SmatechPOS</item>
     </style>
 </resources>

@@ -15,8 +15,7 @@ class SearchViewModel: ViewModel() {
 
 
     fun searchProducts(searchTerm: String, products : List<ProductModel>){
-//        val currentSearchList = _searchedList.value ?: emptyList()
-        _searchedList.value = products.filter { it.productName.contains(searchTerm) }
+        _searchedList.value = products.filter { it.productName.contains(searchTerm, ignoreCase = true) }
     }
 
     fun toggleSearching(search: Boolean){

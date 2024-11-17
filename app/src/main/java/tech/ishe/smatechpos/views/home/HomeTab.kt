@@ -17,9 +17,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -46,7 +48,11 @@ import tech.ishe.smatechpos.views.home.widgets.ProductCard
 
 
 @Composable
-fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, modifier: Modifier) {
+fun HomeTab(
+    productsViewModel: ProductsViewModel,
+    navController: NavController,
+    modifier: Modifier
+) {
     var searchString by remember {
         mutableStateOf("")
     }
@@ -59,7 +65,7 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
     val isSearching = searchViewModel.isSearching.observeAsState(false)
     val productsResult = productsViewModel.productsResult.observeAsState()
 
-    if(searchString.isEmpty()){
+    if (searchString.isEmpty()) {
         searchViewModel.toggleSearching(false)
 
     }
@@ -78,13 +84,21 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
             OutlinedTextField(
                 value = searchString,
                 onValueChange = {
-                    searchViewModel.toggleSearching(true)
                     searchString = it
                 },
                 shape = RoundedCornerShape(15.dp),
                 modifier = Modifier
                     .weight(1f),
-                label = { Text(text = "Search") }
+                label = { Text(text = "Search products") },
+                suffix = {
+                        Icon(
+                            Icons.Rounded.Clear,
+                            contentDescription = "clear textfield",
+                            modifier = Modifier.clickable {
+                                searchString = ""
+                            },
+                        )
+                }
             )
             Spacer(modifier = Modifier.width(16.dp))
             Box(modifier = Modifier
@@ -93,6 +107,7 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
                 .height(45.dp)
                 .width(45.dp)
                 .clickable {
+                    searchViewModel.toggleSearching(true)
                     val productsResponse = productsResult.value
                     if (productsResponse is NetworkResponse.Success) {
                         val products = productsResponse.data
@@ -100,7 +115,7 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
                     }
                 }
                 .padding(6.dp),
-                contentAlignment=Alignment.Center
+                contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Search,
@@ -116,13 +131,13 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
             modifier = Modifier
                 .height(16.dp)
         )
-        if(isSearching.value){
+        if (isSearching.value) {
             Text(
                 text = "Searching Products",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
-        } else{
+        } else {
             Text(
                 text = "Products",
                 fontSize = 22.sp,
@@ -137,11 +152,13 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
                 .background(MaterialTheme.colorScheme.secondaryContainer)
         )
 
-        Box(modifier = Modifier
-            .fillMaxSize()) {
-            if(isSearching.value){
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            if (isSearching.value) {
                 SearchedProducts(searchViewModel, productsViewModel, navController)
-            } else{
+            } else {
                 ProductsList(productsViewModel, navController)
             }
 
@@ -151,15 +168,32 @@ fun HomeTab(productsViewModel: ProductsViewModel, navController: NavController, 
 }
 
 @Composable
-fun SearchedProducts(searchViewModel: SearchViewModel, productsViewModel: ProductsViewModel, navController: NavController) {
+fun SearchedProducts(
+    searchViewModel: SearchViewModel,
+    productsViewModel: ProductsViewModel,
+    navController: NavController
+) {
     val searchedProducts = searchViewModel.searchedList.observeAsState()
 
     val products = searchedProducts.value
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         products?.let {
-            items(it.size) { index ->
-                ProductCard(products[index], productsViewModel, navController)
+            if (products.isNotEmpty()) {
+                items(it.size) { index ->
+                    ProductCard(products[index], productsViewModel, navController)
+                }
+            } else {
+                item {
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                            .padding(vertical = 16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("No products found...")
+                    }
+                }
             }
+
         }
     }
 }
@@ -183,7 +217,7 @@ fun ProductsList(productsViewModel: ProductsViewModel, navController: NavControl
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
 
-            ) {
+                ) {
                 CircularProgressIndicator()
             }
         }

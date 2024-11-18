@@ -68,7 +68,7 @@ class OrdersViewModel : ViewModel() {
                         NetworkResponse.Error("Failed to load orders at the moment...")
                 }
             } catch (e: Exception) {
-                e.message?.let { Log.e("Post Order Error", it) }
+                e.message?.let { Log.e("Get Orders Error", it) }
                 _ordersResult.value =
                     NetworkResponse.Error("Failed to load orders at the moment...")
 
